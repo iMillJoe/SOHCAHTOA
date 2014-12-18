@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  SOHCAHTOA
 //
 //  Created by Joe Million on 10/22/14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class TriangleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
