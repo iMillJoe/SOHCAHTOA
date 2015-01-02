@@ -25,60 +25,310 @@ class SOHCAHTOATests: XCTestCase {
         // This is an example of a functional test case.
        // XCTAssert(true, "Pass")
         
-        
-        let test3 = IMCalculator.evaluateExpression("12.3*15.2/2.3223*π")
-        println(test3)
-        
-        let test4 = IMCalculator.evaluateExpression("12.3.4*15.2/2.3223*π")
-        println(test4)
-        
-        let test5 = IMCalculator.evaluateExpression("5(SIN30)")
-        println(test5)
-        
-        let test6 = IMCalculator.evaluateExpression("5(COS30)")
-        println(test6)
-        
-        let test7 = IMCalculator.evaluateExpression("5(TAN30)")
-        println(test7)
-        
-        let test8 = IMCalculator.evaluateExpression("5(TAN30)+0")
-        println(test8)
-        
-        println("\n***TEST***")
         var test = ""
-        test = "3.1*5/(3^π)SQRT"
+        test = "5+1"
+        println("\n*** TEST *** \(test)")
         var result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 6.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
         
-        
+ 
         test = "3.1*5"
-        println("\n***TEST **** \(test)")
+        println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
-        
+        if (result.result != 15.5 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+
         test = "something stupid"
-        println("\n***TEST **** \(test)")
+        println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "syntaxError")
+        {
+            XCTFail("\(test) failed")
+        }
+        
         
         test = "****** Like Nic is A Fag ******"
-        println("\n***TEST **** \(test)")
+        println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
-        
+        if (result.result != nil || result.syntaxError != "syntaxError")
+        {
+            XCTFail("\(test) failed")
+        }
+
         test = "2*9/3^2"
-        println("\n***TEST **** \(test)")
+        println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
-        
-        test = "5(C30)²"
-        println("\n***TEST **** \(test)")
+        if (result.result != 2.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+
+        test = "5*(SIN30)²"
+        println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
+        let sinDub = 5.0 * (sin(30.0 * M_PI / 180) * sin(30.0 * M_PI / 180))
+        if (result.result != sinDub || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "5+4(14²/4)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 201.0 || result.syntaxError != nil)
+            {
+                XCTFail("\(test) failed")
+        }
+        
+        test = "5+4*(14²/4)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 201.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "π2"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != M_PI * 2.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "2π"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != M_PI * 2.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "(3+5)2π"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != (3 + 5) * M_PI * 2.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "5+4(14²/4)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 201.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "5+4(14²/4)^2"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 9609.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "5+4(14²/4)2"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 397.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result) should be 397.0")
+        }
         
         
+        test = "2(3+5)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 16.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
         
+        test = "(3+5)2"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 16.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
         
+        test = "2*2*2"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 8.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "2(3*3)+15/3"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 23.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "3(4(5(6*7²)))"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 17640.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "3((4*5)(5-1))²"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 19200.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "2.3*4.53((π²9)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "mismatched parentheses")
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "2pi"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != M_PI * 2 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "π²+π3((13π/π12))"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        var pDub: Double = (M_PI * M_PI) + (M_PI * 3) * ((13 * M_PI / M_PI * 12))
+        if (result.result != pDub || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result) should be \(pDub)" )
+        }
+        
+        test = "13π/π12"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        pDub = ((13 * M_PI / M_PI * 12))
+        if (result.result != pDub || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result) should be \(pDub)" )
+        }
+        
+        test = "13*3/3*12"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        pDub = ((13 * 3 / 3 * 12))
+        if (result.result != pDub || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result) should be \(pDub)" )
+        }
+        
+        test = "1+2-3+4"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 4.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "(5-3)/(3-3)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "division by zero")
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "3-0.0"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 3.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "3-3"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 0.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "0.0"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 0.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "1+"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "syntaxError")
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "1-"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "syntaxError")
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
+        
+        test = "⁻4*5"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != 9 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result)" )
+        }
         
     }
     
