@@ -110,11 +110,29 @@ class SOHCAHTOATests: XCTestCase {
             XCTFail("\(test) failed")
         }
         
-        test = "2π"
+        test = "π2"
         println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
         if (result.result != M_PI * 2.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = "("
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "mismatched parentheses")
+        {
+            XCTFail("\(test) failed")
+        }
+        
+        test = ")"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != nil || result.syntaxError != "mismatched parentheses")
         {
             XCTFail("\(test) failed")
         }
@@ -325,11 +343,49 @@ class SOHCAHTOATests: XCTestCase {
         println("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         println("***TEST RESULTS:\(result)  ****\n")
-        if (result.result != 9 || result.syntaxError != nil)
+        if (result.result != -20.0 || result.syntaxError != nil)
         {
             XCTFail("\(test) failed is \(result.result)" )
         }
         
+        test = "5*⁻15(13pi²/⁻14)/4+5-1/2"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        pDub = 5 * -15 * ( 13 * (M_PI * M_PI ) / -14 ) / 4 + 5 - 1 / 2
+        if (result.result != pDub || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result), should be \(pDub)" )
+        }
+        
+        test = "(5*⁻15(13pi²/⁻14)/4+5-1/2)*76/14(3^8)"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        pDub = pDub * (76 / 14 * ( pow(3,8)  ))
+        if (result.result != pDub || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result), should be \(pDub)" )
+        }
+        
+        //unary minus testing (with binary minus operator)
+        test = "5*-3"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != -15.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result), should be -15.0)" )
+        }
+        
+        test = "-5*3"
+        println("\n*** TEST *** \(test)")
+        result = IMCalculator.evaluateExpression(test)
+        println("***TEST RESULTS:\(result)  ****\n")
+        if (result.result != -15.0 || result.syntaxError != nil)
+        {
+            XCTFail("\(test) failed is \(result.result), should be -15.0)" )
+        }
     }
     
     //func testPerformanceExample() {

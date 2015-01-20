@@ -107,12 +107,33 @@ class IMCalculator {
 
         
         // sin="∫" cos="⊂" tan="⊃"
-        let filters = ["SIN": "∫", "COS": "⊂", "TAN": "⊃", "SQRT": "√","²": "^2", "pi": "π"]
+        let filters = [
+            "SIN": "∫",
+            "COS": "⊂",
+            "TAN": "⊃",
+            "SQRT": "√",
+            "²": "^2",
+            "pi": "π",
+            "--": "-⁻",
+            "*-": "*⁻",
+            "+-": "+⁻",
+            "/-": "/⁻",
+            "**": "^"
+        ]
+        
         var filteredInput = input
         for (oldStr, newStr) in filters {
             filteredInput = filteredInput.stringByReplacingOccurrencesOfString(oldStr, withString: newStr, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
         }
-
+        
+        if (filteredInput.hasPrefix("-"))
+        {
+            filteredInput = filteredInput.stringByReplacingOccurrencesOfString("-", withString: "⁻", options: NSStringCompareOptions.CaseInsensitiveSearch, range: filteredInput.startIndex ..< filteredInput.startIndex.successor() )
+        }
+        
+        
+        
+        
         println("input: \(input)")
         // println("filteredInput: \(filteredInput)")
         
@@ -235,6 +256,7 @@ class IMCalculator {
             
         }
         
+        
         /*******  SHUNTING-YARD  *********/
         // While there are tokens to be read:
         while (tokenized.last != nil) {
@@ -261,15 +283,14 @@ class IMCalculator {
                 // while there is an operator token, o2, at the top of the stack, and
                 // either o1 is left-associative and its precedence is *less than or equal* to that of o2,
                 // or o1 if right associative, and has precedence *less than* that of o2,
-                
-                //tok is o1 stack.last is o2
-            
+                // (tok is o1 stack.last is o2)
                 while ( (stack.last != nil) &&
                     (( tok.isRightAssociative == false && tok.precedence? <= stack.last?.precedence?) ||
                       (tok.isRightAssociative == true  && tok.precedence? < stack.last?.precedence?) )) {
                     // then pop o2 off the stack, onto the output queue;
                     outputQue.append(stack.removeLast())
                 }
+                
                 // push o1 onto the stack.
                 stack.append(tok)
             } 
@@ -295,20 +316,20 @@ class IMCalculator {
                         
                     }
                 }
-                // If the stack runs out without finding a left parenthesis, then there are mismatched parentheses.
-                if (!peek) {
-                    syntaxError = "mismatched parentheses"
-                }
                 
+                // If the stack runs out without finding a left parenthesis, then there are mismatched parentheses.
+                if (peek == false) {
+                    syntaxError = "mismatched parentheses"
+                    return (nil, syntaxError)
+                }
+    
                 // Pop the left parenthesis from the stack, but not onto the output queue.
                 stack.removeLast()
                 
                 // If the token at the top of the stack is a function token, pop it onto the output queue.
                 if ((stack.last?.isFunction?) != nil) {
                     outputQue.append(stack.removeLast())
-                    
                 }
-                
             }
             // When there are no more tokens to read:
             if (tokenized.count == 0) {
@@ -318,12 +339,14 @@ class IMCalculator {
                     if (stack.last?.stringValue == ")" || stack.last?.stringValue == "(") {
                         syntaxError = "mismatched parentheses"
                     }
-                    
                     // Pop the operator onto the output queue.
                     outputQue.append(stack.removeLast())
                 }
             }
         }
+        
+        /*******  END SHUNTING-YARD  *********/
+        
         var result: Double?
         
         // While the ouputCue has objects,
@@ -347,7 +370,7 @@ class IMCalculator {
                 result = operandStack.removeLast().doubleValue * operandStack.removeLast().doubleValue
                 operandStack.append(result!)
             }
-            else if (strVal == "⁻" && operandStack.count > 1) {
+            else if (strVal == "⁻" && operandStack.count > 0) {
                 result = operandStack.removeLast().doubleValue * -1.0
                 operandStack.append(result!)
             }
@@ -396,6 +419,7 @@ class IMCalculator {
         //if the the operandStack contains more than one operand
         //something went wrong!!
         if(operandStack.count > 1) {
+            
             syntaxError = "syntaxError"
             println("operandStack \(operandStack)")
         }
