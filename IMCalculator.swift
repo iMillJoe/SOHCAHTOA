@@ -2,21 +2,37 @@
 //  IMCalculator.swift
 //  SOHCAHTOA
 //
-//  Created by Joe Million on 12/9/14.
+//  Created by iMillJoe on 12/9/14.
 //  Copyright (c) 2014 iMillIndustries. All rights reserved.
 //
+/*
+< SOHCOATOA, an app for working with triangles >
+Copyright (C) <2014>  <iMill Industries>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. (see AppDelegate.swift) If not, see <http://www.gnu.org/licenses/>.
+*/
 
 import Foundation
 
 
-struct IMShuntingToken: Printable {
+struct IMShuntingToken: CustomStringConvertible {
     
     var precedence: Int?
     var isRightAssociative: Bool?
     var isFunction: Bool?
     var numberValue: NSNumber?
     var stringValue: NSString?
-    
     var description: String {
         return "Token '\(stringValue)', prec: \(precedence) rightAss: \(isRightAssociative) strValue: \(stringValue) numValue: \(numberValue)"
     }
@@ -55,7 +71,7 @@ struct IMShuntingToken: Printable {
                 case "⁻":
                     precedence = 3
                     isRightAssociative = true
-                    stringValue  = inpt
+                    stringValue = inpt
             
                 case "+", "-":
                     precedence = 2
@@ -103,7 +119,7 @@ class IMCalculator {
     
     
     /// returns an NSNumber 'result' and a String 'syntaxError' of an expression.
-    class func evaluateExpression(input: String) ->(result: NSNumber?, syntaxError: String?){
+    class func evaluateExpression(input: String) -> (result: NSNumber?, syntaxError: String?) {
 
         
         // sin="∫" cos="⊂" tan="⊃"
@@ -134,7 +150,7 @@ class IMCalculator {
         
         
         
-        println("input: \(input)")
+        print("input: \(input)")
         // println("filteredInput: \(filteredInput)")
         
         var syntaxError: String? = nil
@@ -142,7 +158,7 @@ class IMCalculator {
         // Wrap the input string into an Array called inputCue
         var inputCue: Array<Character> = []
         
-        for char in filteredInput {
+        for char in filteredInput.characters {
             inputCue.append(char)
         }
         
@@ -178,9 +194,7 @@ class IMCalculator {
                     numberBuilder = ""
                 }
                 
-                var opr: NSString = String.convertFromStringInterpolationSegment(inputChar)
-                var tok: IMShuntingToken = IMShuntingToken(initFromObject: opr)
-                
+                let tok: IMShuntingToken = IMShuntingToken(initFromObject: "\(inputChar)")
                 tokenized.append(tok)
                 
                 
@@ -188,13 +202,12 @@ class IMCalculator {
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".":
                 
                 var peek: Bool = false
-                for char in numberBuilder {
+                for char in numberBuilder.characters {
                     if (char == "." && inputChar == ".") {
                         peek = true
                         syntaxError = "Bad Decimal"
                     }
                 }
-                
                 if !peek {
                     numberBuilder.append(inputChar)
                 }
@@ -226,10 +239,9 @@ class IMCalculator {
         // insert tokens for implicit multiplcation
         for var index = 0; index < tokenized.count; ++index {
             var strVal: String
-            var numVal: Double?
             let token = tokenized[index]
             if (token.numberValue == nil || token.stringValue == "π") {
-                strVal = token.stringValue!
+                strVal = token.stringValue! as String
                 
                 if (strVal == "(" && index > 0) {
                     if (tokenized[index-1].numberValue != nil) {
@@ -285,8 +297,8 @@ class IMCalculator {
                 // or o1 if right associative, and has precedence *less than* that of o2,
                 // (tok is o1 stack.last is o2)
                 while ( (stack.last != nil) &&
-                    (( tok.isRightAssociative == false && tok.precedence? <= stack.last?.precedence?) ||
-                      (tok.isRightAssociative == true  && tok.precedence? < stack.last?.precedence?) )) {
+                    (( tok.isRightAssociative == false && tok.precedence <= stack.last?.precedence) ||
+                      (tok.isRightAssociative == true  && tok.precedence < stack.last?.precedence) )) {
                     // then pop o2 off the stack, onto the output queue;
                     outputQue.append(stack.removeLast())
                 }
@@ -327,7 +339,7 @@ class IMCalculator {
                 stack.removeLast()
                 
                 // If the token at the top of the stack is a function token, pop it onto the output queue.
-                if ((stack.last?.isFunction?) != nil) {
+                if ((stack.last?.isFunction) != nil) {
                     outputQue.append(stack.removeLast())
                 }
             }
@@ -350,14 +362,13 @@ class IMCalculator {
         var result: Double?
         
         // While the ouputCue has objects,
-        while ((outputQue.last?) != nil) {
+        while ((outputQue.last) != nil) {
  
-            let token = outputQue.first?
-            outputQue.removeAtIndex(0)
-            let strVal = token?.stringValue
+            let token = outputQue.removeAtIndex(0)
+            let strVal = token.stringValue
             
-            if (token?.numberValue != nil) {
-                let dub = token?.numberValue?.doubleValue
+            if (token.numberValue != nil) {
+                let dub = token.numberValue?.doubleValue
                 operandStack.append(dub!)
             }
             
@@ -421,15 +432,15 @@ class IMCalculator {
         if(operandStack.count > 1) {
             
             syntaxError = "syntaxError"
-            println("operandStack \(operandStack)")
+            print("operandStack \(operandStack)")
         }
         
         if (syntaxError != nil) {
-            return (nil, syntaxError?)
+            return (nil, syntaxError)
         }
         
         else {
-            return (operandStack.first, syntaxError?)
+            return (operandStack.first, syntaxError)
         }
     }
 

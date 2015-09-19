@@ -14,7 +14,13 @@
 		6014E69B19F8881600D738D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6014E69A19F8881600D738D6 /* Images.xcassets */; };
 		6014E69E19F8881600D738D6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6014E69C19F8881600D738D6 /* LaunchScreen.xib */; };
 		6014E6AA19F8881600D738D6 /* SOHCAHTOATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014E6A919F8881600D738D6 /* SOHCAHTOATests.swift */; };
-		6014E6B619F8889A00D738D6 /* CircumCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014E6B519F8889A00D738D6 /* CircumCircleViewController.swift */; };
+		6027E7AC1A705D01007E54EE /* IMTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6027E7AB1A705D01007E54EE /* IMTriangle.m */; };
+		6027E7AD1A705D01007E54EE /* IMTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6027E7AB1A705D01007E54EE /* IMTriangle.m */; };
+		609539D91A98F4160066DF76 /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609539D81A98F4160066DF76 /* CalcButton.swift */; };
+		60996F011A6F110400BD7F64 /* CircumCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60996F001A6F110400BD7F64 /* CircumCircleViewController.swift */; };
+		60996F4A1A6F170D00BD7F64 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60996F491A6F170D00BD7F64 /* KeyboardViewController.swift */; };
+		60996F4D1A6F170D00BD7F64 /* IMDecimalKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 60996F451A6F170D00BD7F64 /* IMDecimalKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		60996F521A6F1D7700BD7F64 /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60996F511A6F1D7700BD7F64 /* KeyboardView.xib */; };
 		60BECE7C1A37CB9E00113349 /* IMCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BECE7B1A37CB9E00113349 /* IMCalculator.swift */; };
 		60BECE7D1A37CB9E00113349 /* IMCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BECE7B1A37CB9E00113349 /* IMCalculator.swift */; };
 /* End PBXBuildFile section */
@@ -27,7 +33,28 @@
 			remoteGlobalIDString = 6014E68B19F8881600D738D6;
 			remoteInfo = SOHCAHTOA;
 		};
+		60996F4B1A6F170D00BD7F64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6014E68419F8881600D738D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60996F441A6F170D00BD7F64;
+			remoteInfo = IMDecimalKeyboard;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		60996F401A6F164E00BD7F64 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				60996F4D1A6F170D00BD7F64 /* IMDecimalKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6014E68C19F8881600D738D6 /* SOHCAHTOA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SOHCAHTOA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +68,15 @@
 		6014E6A319F8881600D738D6 /* SOHCAHTOATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SOHCAHTOATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6014E6A819F8881600D738D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6014E6A919F8881600D738D6 /* SOHCAHTOATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOHCAHTOATests.swift; sourceTree = "<group>"; };
-		6014E6B519F8889A00D738D6 /* CircumCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircumCircleViewController.swift; path = ../CircumCircleViewController.swift; sourceTree = "<group>"; };
+		6027E7AA1A705D01007E54EE /* IMTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMTriangle.h; path = ../IMTriangle.h; sourceTree = "<group>"; };
+		6027E7AB1A705D01007E54EE /* IMTriangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMTriangle.m; path = ../IMTriangle.m; sourceTree = "<group>"; };
+		6027E7AE1A705FCA007E54EE /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = ../BridgingHeader.h; sourceTree = "<group>"; };
+		609539D81A98F4160066DF76 /* CalcButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalcButton.swift; sourceTree = "<group>"; };
+		60996F001A6F110400BD7F64 /* CircumCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircumCircleViewController.swift; path = ../CircumCircleViewController.swift; sourceTree = "<group>"; };
+		60996F451A6F170D00BD7F64 /* IMDecimalKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IMDecimalKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		60996F481A6F170D00BD7F64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60996F491A6F170D00BD7F64 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		60996F511A6F1D7700BD7F64 /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
 		60BECE7B1A37CB9E00113349 /* IMCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMCalculator.swift; path = ../IMCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +95,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		60996F421A6F170D00BD7F64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -68,6 +110,7 @@
 			children = (
 				6014E68E19F8881600D738D6 /* SOHCAHTOA */,
 				6014E6A619F8881600D738D6 /* SOHCAHTOATests */,
+				60996F461A6F170D00BD7F64 /* IMDecimalKeyboard */,
 				6014E68D19F8881600D738D6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +120,7 @@
 			children = (
 				6014E68C19F8881600D738D6 /* SOHCAHTOA.app */,
 				6014E6A319F8881600D738D6 /* SOHCAHTOATests.xctest */,
+				60996F451A6F170D00BD7F64 /* IMDecimalKeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,14 +128,9 @@
 		6014E68E19F8881600D738D6 /* SOHCAHTOA */ = {
 			isa = PBXGroup;
 			children = (
-				6014E69119F8881600D738D6 /* AppDelegate.swift */,
-				6014E69319F8881600D738D6 /* CalculatorViewController.swift */,
-				6014E69519F8881600D738D6 /* TriangleViewController.swift */,
-				6014E6B519F8889A00D738D6 /* CircumCircleViewController.swift */,
-				60BECE7B1A37CB9E00113349 /* IMCalculator.swift */,
-				6014E69719F8881600D738D6 /* Main.storyboard */,
-				6014E69A19F8881600D738D6 /* Images.xcassets */,
-				6014E69C19F8881600D738D6 /* LaunchScreen.xib */,
+				60D1A4C01A73B14B009B4339 /* Model */,
+				60D1A4C11A73B16E009B4339 /* View */,
+				60D1A4C21A73B17D009B4339 /* Controller */,
 				6014E68F19F8881600D738D6 /* Supporting Files */,
 			);
 			path = SOHCAHTOA;
@@ -100,6 +139,8 @@
 		6014E68F19F8881600D738D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6027E7AE1A705FCA007E54EE /* BridgingHeader.h */,
+				6014E69119F8881600D738D6 /* AppDelegate.swift */,
 				6014E69019F8881600D738D6 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -122,6 +163,55 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		60996F461A6F170D00BD7F64 /* IMDecimalKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				60996F491A6F170D00BD7F64 /* KeyboardViewController.swift */,
+				60996F511A6F1D7700BD7F64 /* KeyboardView.xib */,
+				60996F471A6F170D00BD7F64 /* Supporting Files */,
+			);
+			path = IMDecimalKeyboard;
+			sourceTree = "<group>";
+		};
+		60996F471A6F170D00BD7F64 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				60996F481A6F170D00BD7F64 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60D1A4C01A73B14B009B4339 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60BECE7B1A37CB9E00113349 /* IMCalculator.swift */,
+				6027E7AA1A705D01007E54EE /* IMTriangle.h */,
+				6027E7AB1A705D01007E54EE /* IMTriangle.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		60D1A4C11A73B16E009B4339 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6014E69A19F8881600D738D6 /* Images.xcassets */,
+				6014E69C19F8881600D738D6 /* LaunchScreen.xib */,
+				6014E69719F8881600D738D6 /* Main.storyboard */,
+				609539D81A98F4160066DF76 /* CalcButton.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		60D1A4C21A73B17D009B4339 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6014E69319F8881600D738D6 /* CalculatorViewController.swift */,
+				60996F001A6F110400BD7F64 /* CircumCircleViewController.swift */,
+				6014E69519F8881600D738D6 /* TriangleViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,10 +222,12 @@
 				6014E68819F8881600D738D6 /* Sources */,
 				6014E68919F8881600D738D6 /* Frameworks */,
 				6014E68A19F8881600D738D6 /* Resources */,
+				60996F401A6F164E00BD7F64 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				60996F4C1A6F170D00BD7F64 /* PBXTargetDependency */,
 			);
 			name = SOHCAHTOA;
 			productName = SOHCAHTOA;
@@ -160,21 +252,45 @@
 			productReference = 6014E6A319F8881600D738D6 /* SOHCAHTOATests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		60996F441A6F170D00BD7F64 /* IMDecimalKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60996F4E1A6F170E00BD7F64 /* Build configuration list for PBXNativeTarget "IMDecimalKeyboard" */;
+			buildPhases = (
+				60996F411A6F170D00BD7F64 /* Sources */,
+				60996F421A6F170D00BD7F64 /* Frameworks */,
+				60996F431A6F170D00BD7F64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IMDecimalKeyboard;
+			productName = IMDecimalKeyboard;
+			productReference = 60996F451A6F170D00BD7F64 /* IMDecimalKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		6014E68419F8881600D738D6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = iMillIndustries;
 				TargetAttributes = {
 					6014E68B19F8881600D738D6 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 7LU46WA9DB;
 					};
 					6014E6A219F8881600D738D6 = {
 						CreatedOnToolsVersion = 6.0.1;
 						TestTargetID = 6014E68B19F8881600D738D6;
+					};
+					60996F441A6F170D00BD7F64 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 7LU46WA9DB;
 					};
 				};
 			};
@@ -193,6 +309,7 @@
 			targets = (
 				6014E68B19F8881600D738D6 /* SOHCAHTOA */,
 				6014E6A219F8881600D738D6 /* SOHCAHTOATests */,
+				60996F441A6F170D00BD7F64 /* IMDecimalKeyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -215,6 +332,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		60996F431A6F170D00BD7F64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60996F521A6F1D7700BD7F64 /* KeyboardView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -222,9 +347,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60996F011A6F110400BD7F64 /* CircumCircleViewController.swift in Sources */,
+				609539D91A98F4160066DF76 /* CalcButton.swift in Sources */,
+				6027E7AC1A705D01007E54EE /* IMTriangle.m in Sources */,
 				6014E69619F8881600D738D6 /* TriangleViewController.swift in Sources */,
 				60BECE7C1A37CB9E00113349 /* IMCalculator.swift in Sources */,
-				6014E6B619F8889A00D738D6 /* CircumCircleViewController.swift in Sources */,
 				6014E69219F8881600D738D6 /* AppDelegate.swift in Sources */,
 				6014E69419F8881600D738D6 /* CalculatorViewController.swift in Sources */,
 			);
@@ -235,7 +362,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6014E6AA19F8881600D738D6 /* SOHCAHTOATests.swift in Sources */,
+				6027E7AD1A705D01007E54EE /* IMTriangle.m in Sources */,
 				60BECE7D1A37CB9E00113349 /* IMCalculator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60996F411A6F170D00BD7F64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60996F4A1A6F170D00BD7F64 /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +382,11 @@
 			isa = PBXTargetDependency;
 			target = 6014E68B19F8881600D738D6 /* SOHCAHTOA */;
 			targetProxy = 6014E6A419F8881600D738D6 /* PBXContainerItemProxy */;
+		};
+		60996F4C1A6F170D00BD7F64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60996F441A6F170D00BD7F64 /* IMDecimalKeyboard */;
+			targetProxy = 60996F4B1A6F170D00BD7F64 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -289,6 +430,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -350,9 +492,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SOHCAHTOA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iMillIndustries.Open.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = BridgingHeader.h;
 			};
 			name = Debug;
 		};
@@ -360,9 +508,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SOHCAHTOA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iMillIndustries.Open.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = BridgingHeader.h;
 			};
 			name = Release;
 		};
@@ -380,6 +534,7 @@
 				);
 				INFOPLIST_FILE = SOHCAHTOATests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iMillIndustries.Open.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SOHCAHTOA.app/SOHCAHTOA";
 			};
@@ -395,8 +550,43 @@
 				);
 				INFOPLIST_FILE = SOHCAHTOATests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iMillIndustries.Open.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SOHCAHTOA.app/SOHCAHTOA";
+			};
+			name = Release;
+		};
+		60996F4F1A6F170E00BD7F64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = IMDecimalKeyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iMillIndustries.Open.SOHCAHTOA.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		60996F501A6F170E00BD7F64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = IMDecimalKeyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iMillIndustries.Open.SOHCAHTOA.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -426,6 +616,15 @@
 			buildConfigurations = (
 				6014E6B119F8881600D738D6 /* Debug */,
 				6014E6B219F8881600D738D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60996F4E1A6F170E00BD7F64 /* Build configuration list for PBXNativeTarget "IMDecimalKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60996F4F1A6F170E00BD7F64 /* Debug */,
+				60996F501A6F170E00BD7F64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
