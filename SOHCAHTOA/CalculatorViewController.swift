@@ -48,9 +48,17 @@ class CalculatorViewController: UIViewController {
 
     @IBAction func digitPressed(sender: UIButton) {
         
-        let digit = sender.currentTitle
+        var digit = sender.currentTitle
+        //if it's sin cos or tan, append a space
+        if ( digit?.characters.count > 2)
+        {
+            digit = digit! + " "
+        }
+        
         if (userIsInTheMiddelOfEnteringAnExpression == true) {
             currentExpression.text = currentExpression.text?.stringByAppendingString(digit!)
+            
+            
         }
         else if (currentExpression.text == "0") {
             currentExpression.text = digit!

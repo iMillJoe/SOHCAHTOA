@@ -134,7 +134,8 @@ class IMCalculator {
             "*-": "*⁻",
             "+-": "+⁻",
             "/-": "/⁻",
-            "**": "^"
+            "**": "^",
+            " " : ""
         ]
         
         var filteredInput = input
