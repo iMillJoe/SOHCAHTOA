@@ -13,15 +13,15 @@ import UIKit
 //    
 //     Only override drawRect: if you perform custom drawing.
 //     An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        self.window?.backgroundColor = UIColor.grayColor()
-        self.tintColor = UIColor.grayColor()
-        self.alpha = 1
-        self.tintColorDidChange()
-        self.titleLabel?.textColor = UIColor.greenColor()
-        
-        
-    }
+//    override func drawRect(rect: CGRect) {
+//        self.window?.backgroundColor = UIColor.grayColor()
+//        self.tintColor = UIColor.grayColor()
+//        self.alpha = 1
+//        self.tintColorDidChange()
+//        self.titleLabel?.textColor = UIColor.greenColor()
+//        
+//        
+//    }
     
 
 }

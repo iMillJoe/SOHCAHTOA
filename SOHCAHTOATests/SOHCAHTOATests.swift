@@ -391,9 +391,9 @@ class SOHCAHTOATests: XCTestCase {
         print("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         print("***TEST RESULTS:\(result)  ****\n")
-        if (result.result != 2.5 || result.syntaxError != nil)
+        if (result.result?.stringValue != "2.5" || result.syntaxError != nil)
         {
-            XCTFail("\(test) failed is \(result.result), should be 2.5)" )
+            XCTFail("\(test) failed is \(result.result!), should be 2.5)" )
         }
     }
     

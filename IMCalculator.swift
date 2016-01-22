@@ -39,7 +39,6 @@ struct IMShuntingToken: CustomStringConvertible {
     
     init(initFromObject input: AnyObject) {
         
-        var inpt: NSString
         
         if (input.isKindOfClass(NSString)) {
             stringValue = input as? NSString
@@ -49,8 +48,7 @@ struct IMShuntingToken: CustomStringConvertible {
             stringValue = input.stringValue
         }
         
-        if (stringValue != nil) {
-            inpt = stringValue!
+        if let inpt = stringValue {
 
             switch inpt {
                 case "^":
