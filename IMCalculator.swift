@@ -25,8 +25,17 @@ along with this program. (see AppDelegate.swift) If not, see <http://www.gnu.org
 
 import Foundation
 
+extension String {
+    func asDouble() -> Double? {
+        
+        if let dub: Double = (self as NSString).doubleValue {
+            return dub
+        }
+        return nil
+    }
+}
 
-struct IMShuntingToken: CustomStringConvertible {
+private struct IMShuntingToken: CustomStringConvertible {
     
     var precedence: Int?
     var isRightAssociative: Bool?
@@ -51,22 +60,17 @@ struct IMShuntingToken: CustomStringConvertible {
         if let inpt = stringValue {
 
             switch inpt {
-                case "^":
+                case "^", "√":
                     precedence = 4
                     isRightAssociative = true
                     stringValue = inpt
-                
-                case "√":
-                    precedence = 4
-                    isRightAssociative = false
-                    stringValue = "SQRT"
                 
                 case "*" , "/":
                     precedence = 3
                     isRightAssociative = false
                     stringValue = inpt
                 
-                case "⁻":
+                case "⁻", "∫", "⊂", "⊃":
                     precedence = 3
                     isRightAssociative = true
                     stringValue = inpt
@@ -75,24 +79,6 @@ struct IMShuntingToken: CustomStringConvertible {
                     precedence = 2
                     isRightAssociative = false
                     stringValue = inpt
-                
-                case  "∫", "⊂", "⊃":
-                    //sin= "∫" cos="⊂" tan="⊃"
-                    precedence = 3
-                    isRightAssociative = true
-                    switch inpt {
-                        case "∫":
-                        stringValue = "SIN"
-                        
-                        case "⊂":
-                        stringValue = "COS"
-                        
-                        case "⊃":
-                        stringValue = "TAN"
-                        
-                        default:
-                        stringValue = "IMShunting token: Trig Error"
-                    }
                 
                 case "(", ")", ",":
                     stringValue = inpt
@@ -175,7 +161,7 @@ class IMCalculator {
                 // if numberBuilder has a value
                 if (!numberBuilder.isEmpty) {
                     // Add numberbuilder to tokenized
-                    tokenized.append(IMShuntingToken(initFromObject: (numberBuilder as NSString).doubleValue))
+                    tokenized.append(IMShuntingToken(initFromObject: numberBuilder.asDouble()! ))
                     numberBuilder = ""
                 }
                 tokenized.append(IMShuntingToken(initFromObject: "\(inputChar)"))
@@ -202,9 +188,10 @@ class IMCalculator {
         
         //append any remaing number
         if (!numberBuilder.isEmpty) {
-            tokenized.append(IMShuntingToken(initFromObject: (numberBuilder as NSString).doubleValue))
+            tokenized.append(IMShuntingToken(initFromObject: numberBuilder.asDouble()!))
         }
         
+        //quit now if error
         if (syntaxError != nil) {
             return (nil, syntaxError!)
         }
