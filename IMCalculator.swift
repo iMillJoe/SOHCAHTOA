@@ -122,18 +122,10 @@ class IMCalculator {
         
         // sin="∫" cos="⊂" tan="⊃"
         let filters = [
-            "SIN": "∫",
-            "COS": "⊂",
-            "TAN": "⊃",
-            "SQRT": "√",
-            "²": "^2",
-            "pi": "π",
-            "--": "-⁻",
-            "*-": "*⁻",
-            "+-": "+⁻",
-            "/-": "/⁻",
-            "**": "^",
-            " " : ""
+            "SIN": "∫",  "COS": "⊂", "TAN": "⊃",
+            "SQRT": "√", "²": "^2",  "pi": "π",
+            "--": "-⁻",  "*-": "*⁻", "+-": "+⁻",
+            "/-": "/⁻",  "**": "^",  " " : ""
         ]
         
         var filteredInput = input
@@ -145,8 +137,6 @@ class IMCalculator {
         {
             filteredInput = filteredInput.stringByReplacingOccurrencesOfString("-", withString: "⁻", options: NSStringCompareOptions.CaseInsensitiveSearch, range: filteredInput.startIndex ..< filteredInput.startIndex.successor() )
         }
-        
-        
         
         
         print("input: \(input)")
@@ -163,8 +153,8 @@ class IMCalculator {
         
         // println(" ** inputCue: \(inputCue)")
         
-        var numberBuilder: String = ""
-        var tokenized: Array <IMShuntingToken> = []
+        var numberBuilder = ""
+        var tokenized = Array<IMShuntingToken>()
         //var tokenizer: NSMutableArray = []
         
         while (inputCue.count > 0) {
@@ -183,24 +173,17 @@ class IMCalculator {
             case "*", "/", "+", "-", "∫", "⊂", "⊃", "(", ")", "π", "√", "²", "⁻", "^":
                 
                 // if numberBuilder has a value
-                
                 if (!numberBuilder.isEmpty) {
-                    
                     // Add numberbuilder to tokenized
-                    let str: NSString = numberBuilder as NSString
-                    let tok: IMShuntingToken = IMShuntingToken(initFromObject: str.doubleValue)
-                    tokenized.append(tok)
+                    tokenized.append(IMShuntingToken(initFromObject: (numberBuilder as NSString).doubleValue))
                     numberBuilder = ""
                 }
-                
-                let tok: IMShuntingToken = IMShuntingToken(initFromObject: "\(inputChar)")
-                tokenized.append(tok)
-                
+                tokenized.append(IMShuntingToken(initFromObject: "\(inputChar)"))
                 
             // If input char could make a number
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".":
                 
-                var peek: Bool = false
+                var peek = false
                 for char in numberBuilder.characters {
                     if (char == "." && inputChar == ".") {
                         peek = true
@@ -217,23 +200,18 @@ class IMCalculator {
             inputCue.removeAtIndex(0);
         }
         
+        //append any remaing number
         if (!numberBuilder.isEmpty) {
-            // Add numberbuilder to tokenized
-            let str: NSString = numberBuilder as NSString
-            let num: NSNumber = str.doubleValue
-            let tokn: IMShuntingToken = IMShuntingToken(initFromObject: num)
-            
-            tokenized.append(tokn)
+            tokenized.append(IMShuntingToken(initFromObject: (numberBuilder as NSString).doubleValue))
         }
         
         if (syntaxError != nil) {
             return (nil, syntaxError!)
         }
         
-        var operandStack: Array <NSNumber> = []
-        var outputQue: Array<IMShuntingToken> = []
-
-        var stack: Array<IMShuntingToken>  = []
+        var operandStack = Array<NSNumber>()
+        var outputQue = Array<IMShuntingToken>()
+        var stack = Array<IMShuntingToken>()
         
         // insert tokens for implicit multiplcation
         for var index = 0; index < tokenized.count; ++index {
@@ -241,7 +219,6 @@ class IMCalculator {
             let token = tokenized[index]
             if (token.numberValue == nil || token.stringValue == "π") {
                 strVal = token.stringValue! as String
-                
                 if (strVal == "(" && index > 0) {
                     if (tokenized[index-1].numberValue != nil) {
                         tokenized.insert(IMShuntingToken(initFromObject: "*"), atIndex: index)
