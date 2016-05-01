@@ -184,7 +184,7 @@
     double sideBDeltaY = ( fabs(pointC.y - pointA.y) );
     
     if (sideBDeltaX == 0) {
-        if (!sideBDeltaY == 0)
+        if (!(sideBDeltaY == 0))
         {
             self.sideB = sideBDeltaY;
         }
@@ -210,7 +210,7 @@
     
     if (sideCDeltaX == 0)
     {
-        if (! sideCDeltaY == 0)
+        if (!(sideCDeltaY == 0))
         {
             self.sideC = sideCDeltaY;
         }
