@@ -387,7 +387,7 @@ class SOHCAHTOATests: XCTestCase {
             XCTFail("\(test) failed is \(result.result), should be -15.0)" )
         }
         
-        test = "5(sin 30)"
+        test = "5(SIN 30)"
         print("\n*** TEST *** \(test)")
         result = IMCalculator.evaluateExpression(test)
         print("***TEST RESULTS:\(result)  ****\n")

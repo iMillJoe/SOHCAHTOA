@@ -25,8 +25,17 @@ along with this program. (see AppDelegate.swift) If not, see <http://www.gnu.org
 
 import Foundation
 
+extension String {
+    func asDouble() -> Double? {
+        
+        if let dub: Double = (self as NSString).doubleValue {
+            return dub
+        }
+        return nil
+    }
+}
 
-struct IMShuntingToken: CustomStringConvertible {
+private struct IMShuntingToken: CustomStringConvertible {
     
     var precedence: Int?
     var isRightAssociative: Bool?
@@ -51,22 +60,17 @@ struct IMShuntingToken: CustomStringConvertible {
         if let inpt = stringValue {
 
             switch inpt {
-                case "^":
+                case "^", "√":
                     precedence = 4
                     isRightAssociative = true
                     stringValue = inpt
-                
-                case "√":
-                    precedence = 4
-                    isRightAssociative = false
-                    stringValue = "SQRT"
                 
                 case "*" , "/":
                     precedence = 3
                     isRightAssociative = false
                     stringValue = inpt
                 
-                case "⁻":
+                case "⁻", "∫", "⊂", "⊃":
                     precedence = 3
                     isRightAssociative = true
                     stringValue = inpt
@@ -75,24 +79,6 @@ struct IMShuntingToken: CustomStringConvertible {
                     precedence = 2
                     isRightAssociative = false
                     stringValue = inpt
-                
-                case  "∫", "⊂", "⊃":
-                    //sin= "∫" cos="⊂" tan="⊃"
-                    precedence = 3
-                    isRightAssociative = true
-                    switch inpt {
-                        case "∫":
-                        stringValue = "SIN"
-                        
-                        case "⊂":
-                        stringValue = "COS"
-                        
-                        case "⊃":
-                        stringValue = "TAN"
-                        
-                        default:
-                        stringValue = "IMShunting token: Trig Error"
-                    }
                 
                 case "(", ")", ",":
                     stringValue = inpt
@@ -122,18 +108,10 @@ class IMCalculator {
         
         // sin="∫" cos="⊂" tan="⊃"
         let filters = [
-            "SIN": "∫",
-            "COS": "⊂",
-            "TAN": "⊃",
-            "SQRT": "√",
-            "²": "^2",
-            "pi": "π",
-            "--": "-⁻",
-            "*-": "*⁻",
-            "+-": "+⁻",
-            "/-": "/⁻",
-            "**": "^",
-            " " : ""
+            "SIN": "∫",  "COS": "⊂", "TAN": "⊃",
+            "SQRT": "√", "²": "^2",  "pi": "π",
+            "--": "-⁻",  "*-": "*⁻", "+-": "+⁻",
+            "/-": "/⁻",  "**": "^",  " " : ""
         ]
         
         var filteredInput = input
@@ -145,8 +123,6 @@ class IMCalculator {
         {
             filteredInput = filteredInput.stringByReplacingOccurrencesOfString("-", withString: "⁻", options: NSStringCompareOptions.CaseInsensitiveSearch, range: filteredInput.startIndex ..< filteredInput.startIndex.successor() )
         }
-        
-        
         
         
         print("input: \(input)")
@@ -163,8 +139,8 @@ class IMCalculator {
         
         // println(" ** inputCue: \(inputCue)")
         
-        var numberBuilder: String = ""
-        var tokenized: Array <IMShuntingToken> = []
+        var numberBuilder = ""
+        var tokenized = Array<IMShuntingToken>()
         //var tokenizer: NSMutableArray = []
         
         while (inputCue.count > 0) {
@@ -183,24 +159,17 @@ class IMCalculator {
             case "*", "/", "+", "-", "∫", "⊂", "⊃", "(", ")", "π", "√", "²", "⁻", "^":
                 
                 // if numberBuilder has a value
-                
                 if (!numberBuilder.isEmpty) {
-                    
                     // Add numberbuilder to tokenized
-                    let str: NSString = numberBuilder as NSString
-                    let tok: IMShuntingToken = IMShuntingToken(initFromObject: str.doubleValue)
-                    tokenized.append(tok)
+                    tokenized.append(IMShuntingToken(initFromObject: numberBuilder.asDouble()! ))
                     numberBuilder = ""
                 }
-                
-                let tok: IMShuntingToken = IMShuntingToken(initFromObject: "\(inputChar)")
-                tokenized.append(tok)
-                
+                tokenized.append(IMShuntingToken(initFromObject: "\(inputChar)"))
                 
             // If input char could make a number
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".":
                 
-                var peek: Bool = false
+                var peek = false
                 for char in numberBuilder.characters {
                     if (char == "." && inputChar == ".") {
                         peek = true
@@ -217,23 +186,19 @@ class IMCalculator {
             inputCue.removeAtIndex(0);
         }
         
+        //append any remaing number
         if (!numberBuilder.isEmpty) {
-            // Add numberbuilder to tokenized
-            let str: NSString = numberBuilder as NSString
-            let num: NSNumber = str.doubleValue
-            let tokn: IMShuntingToken = IMShuntingToken(initFromObject: num)
-            
-            tokenized.append(tokn)
+            tokenized.append(IMShuntingToken(initFromObject: numberBuilder.asDouble()!))
         }
         
+        //quit now if error
         if (syntaxError != nil) {
             return (nil, syntaxError!)
         }
         
-        var operandStack: Array <NSNumber> = []
-        var outputQue: Array<IMShuntingToken> = []
-
-        var stack: Array<IMShuntingToken>  = []
+        var operandStack = Array<NSNumber>()
+        var outputQue = Array<IMShuntingToken>()
+        var stack = Array<IMShuntingToken>()
         
         // insert tokens for implicit multiplcation
         for index in 0 ..< tokenized.count {
@@ -241,7 +206,6 @@ class IMCalculator {
             let token = tokenized[index]
             if (token.numberValue == nil || token.stringValue == "π") {
                 strVal = token.stringValue! as String
-                
                 if (strVal == "(" && index > 0) {
                     if (tokenized[index-1].numberValue != nil) {
                         tokenized.insert(IMShuntingToken(initFromObject: "*"), atIndex: index)
