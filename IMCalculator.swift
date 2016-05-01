@@ -236,7 +236,7 @@ class IMCalculator {
         var stack: Array<IMShuntingToken>  = []
         
         // insert tokens for implicit multiplcation
-        for var index = 0; index < tokenized.count; ++index {
+        for index in 0 ..< tokenized.count {
             var strVal: String
             let token = tokenized[index]
             if (token.numberValue == nil || token.stringValue == "π") {
